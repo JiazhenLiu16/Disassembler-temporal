@@ -96,7 +96,7 @@ int main (int argc, char *argv[])
         if (verifyMIPSInstruction(lineNum,bufferpointer)==0)
         {
             printf("error");
-            end;
+            continue;
         }
         else 
         {

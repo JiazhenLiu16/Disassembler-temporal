@@ -30,9 +30,9 @@ static char DEBUG = 0; /* Not all compilers will accept DEBUG_DEFAULT_VALUE. */
 static char * debugStack = NULL;
 static unsigned debugStackCapacity = 0;
 static unsigned debugStackNumEntries = 0;
-static void debug_push();
-static char debug_pop();
-static int resizeDebugStack ();
+static void debug_push(void);
+static char debug_pop(void);
+static int resizeDebugStack (void);
 
 static const char * ERROR = "Error: cannot allocate space in memory.\n";
 
@@ -69,12 +69,12 @@ void printDebug(const char * restrict_format, ...)
 }
 
 /**
- * void debug_on()
+ * void debug_on(void)
  *
  * Turns debugging on.
  *
  */
-void debug_on()
+void debug_on(void)
 {
     if ( ! OVERRIDE_DEBUG_CHANGES )
     {
@@ -84,12 +84,12 @@ void debug_on()
 }
 
 /**
- * void debug_off()
+ * void debug_off(void)
  *
  * Turns debugging off.
  *
  */
-void debug_off()
+void debug_off(void)
 {
     if ( ! OVERRIDE_DEBUG_CHANGES )
     {
@@ -99,7 +99,7 @@ void debug_off()
 }
 
 /**
- * void debug_restore()
+ * void debug_restore(void)
  *
  * Restores the DEBUG state to its previous value.  Once the debugging
  * state has been restored to its initial state, additional calls to
@@ -107,7 +107,7 @@ void debug_off()
  * <code>debug_on()</code> or <code>debug_off()</code> is called again.
  *
  */
-void debug_restore()
+void debug_restore(void)
 {
     if ( ! OVERRIDE_DEBUG_CHANGES )
     {
@@ -115,38 +115,37 @@ void debug_restore()
     }
 }
 
-int  debug_is_on();
 
 /**
- * int debug_is_on()
+ * int debug_is_on(void)
  *
  * Returns 1 if debugging is currently on, 0 if debugging is currently off.
  *
  */
-int debug_is_on()
+int debug_is_on(void)
 {
     return DEBUG;
 }
 
 /**
- * void override_debug_changes()
+ * void override_debug_changes(void)
  *
  * Overrides future attempts to change the debug state, freezing it to
  * its current state (whatever that is).
  *
  */
-void override_debug_changes()
+void override_debug_changes(void)
 {
     OVERRIDE_DEBUG_CHANGES = 1;
 }
 
 /**
- * void debug_push()
+ * void debug_push(void)
  *
  * Pushes the current debug state onto the stack.
  *
  */
-static void debug_push()
+static void debug_push(void)
 {
     if ( debugStack == NULL || debugStackNumEntries <= debugStackCapacity )
         resizeDebugStack();
@@ -155,13 +154,13 @@ static void debug_push()
 }
 
 /**
- * void debug_pop()
+ * void debug_pop(void)
  *
  * Pops and returns the most recent debug state from the stack.  If
  * there was no value on the stack, returns the DEBUG_DEFAULT_VALUE.
  *
  */
-static char debug_pop()
+static char debug_pop(void)
 {
     if ( debugStackNumEntries > 0 )
         return debugStack[--debugStackNumEntries];
@@ -169,7 +168,7 @@ static char debug_pop()
     return DEBUG_DEFAULT_VALUE;
 }
 
-static int resizeDebugStack ()
+static int resizeDebugStack (void)
   /* Postcondition: debug stack now has the capacity to hold a
    *      longer history of debug states.
    * Returns 1 if everything went OK; 0 if there was a memory

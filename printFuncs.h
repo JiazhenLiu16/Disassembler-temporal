@@ -50,10 +50,10 @@ extern int ERROR_LIMIT;
 
 void printDebug(const char * restrict_format, ...);
 
-void debug_on();
-void debug_off();
-void debug_restore();
-int  debug_is_on();
-void override_debug_changes();
+void debug_on(void);
+void debug_off(void);
+void debug_restore(void);
+int  debug_is_on(void);
+void override_debug_changes(void);
 
 #endif

@@ -40,10 +40,9 @@
 
 int binToDec(char string[], int begin, int end)
 {   
-	int i;
 	int decimal = 0;
 
-	for (begin;begin<=end;begin++)
+        for ( ; begin<=end ; begin++ )
 	{
 		decimal+=(string[begin]-'0') <<(end-begin);
 	}

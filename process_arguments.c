@@ -27,7 +27,7 @@
 
 #include "process_arguments.h"
 
-static const int SAME;		/* useful for making strcmp readable */
+extern const int SAME;		/* useful for making strcmp readable */
                                 /* e.g., if (strcmp (str1, str2) == SAME) */
 
 FILE * process_arguments(int argc, char * argv[])

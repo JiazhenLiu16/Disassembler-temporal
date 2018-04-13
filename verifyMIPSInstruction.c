@@ -60,11 +60,11 @@ int verifyMIPSInstruction (int lineNum, char * instr)
     {
       for (p=instr;*p!='\0';p++)
       {
-        if (*p!=='0'&&*p!=='1')
+        if (*p!='0'&&*p!='1')
         {
             printError ("Error: line %d has invalid character: %d\n",
                     lineNum,*p);
-        return 0;
+            return 0;
         }
       }
     /*Return 1 if it is okay.
